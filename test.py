@@ -9,33 +9,33 @@ from threading import Timer
 #обновление статуса в хде 
 def updateHDE(check_id):
     headers = {
-            "Authorization": "Basic ZHBAcGNoZWxwZXIucnU6N2Y5MjQ4OTctZDk3Yy00NGEzLWJhNTItMDJmN2Q0ZTY4YTAw",
+            "Authorization": "Basic ",
             'Content-type': 'application/json',
 
         }
     json_dataHDE={
         'status_id':'closed'
     }
-    r = requests.put('https://support.pchelper.ru/api/v2/tickets/{}'.format(check_id), headers=headers,json=json_dataHDE)
+    r = requests.put('https://.../api/v2/tickets/{}'.format(check_id), headers=headers,json=json_dataHDE)
     print(r)
 
 #обновление статуса в платрум
 def updatePlatrum(json_dataUP):
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": ""
     }
 
-    r = requests.post('https://stomatologia22.platrum.ru/tasks/api/task/update', headers=headers,json=json_dataUP)
+    r = requests.post('https://....platrum.ru/tasks/api/task/update', headers=headers,json=json_dataUP)
     jsonDataUP = r.json()
 #получение id заявки в хде по id из платрума
 def taskById(js_tid,check_id):
     headers = {
-            "Authorization": "Basic ZHBAcGNoZWxwZXIucnU6N2Y5MjQ4OTctZDk3Yy00NGEzLWJhNTItMDJmN2Q0ZTY4YTAw",
-            'Content-type': 'application/json',
+            "Authorization": "Basic ",
+            'Content-type': '/json',
 
         }
-    r = requests.get('https://support.pchelper.ru/api/v2/tickets', headers=headers,json=js_tid)
+    r = requests.get('https://....ru/api/v2/tickets', headers=headers,json=js_tid)
     jsonDatah = r.json()
     dataHT = jsonDatah.get('data')
     data_ht = dataHT.get('{}'.format(check_id))
@@ -48,21 +48,21 @@ def taskById(js_tid,check_id):
 def status_platrum(json_dataTP):
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "..."
     }
 
-    r = requests.get('https://stomatologia22.platrum.ru/tasks/api/task/get', headers=headers,json=json_dataTP)
+    r = requests.get('https://....platrum.ru/tasks/api/task/get', headers=headers,json=json_dataTP)
     jsonDatatp = r.json()
     data_tp = jsonDatatp.get('data')
     return data_tp
 #создать заявку в hde
 def to_hde(json_datah):
     headers = {
-            "Authorization": "Basic ZHBAcGNoZWxwZXIucnU6N2Y5MjQ4OTctZDk3Yy00NGEzLWJhNTItMDJmN2Q0ZTY4YTAw",
+            "Authorization": "Basic ...",
             'Content-type': 'application/json',
 
         }
-    r = requests.post('https://support.pchelper.ru/api/v2/tickets', headers=headers,json=json_datah)
+    r = requests.post('https://....ru/api/v2/tickets', headers=headers,json=json_datah)
     jsonDatah = r.json()
     dataH = jsonDatah.get('data')
     global thde_id
@@ -73,9 +73,9 @@ def to_hde(json_datah):
 def by_id(id):
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "..."
     }
-    r = requests.post('https://stomatologia22.platrum.ru/user/api/profile/list', headers=headers)
+    r = requests.post('https://....platrum.ru/user/api/profile/list', headers=headers)
     jsonDatap = r.json()
     data=(jsonDatap.get('data'))
     key_names = []
@@ -99,13 +99,13 @@ def by_id(id):
 def new_tasks():
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "..."
     }
     json_datap = {
-        'responsible_user_ids': ['c41500e5c111a2e2894c8c8384acde5c','c41500e5c111a2e2894c8c8384acde5c'],
+        'responsible_user_ids': ['...','...'],
         'status_key':['new','in_progress','finished']
     }
-    r = requests.get('https://stomatologia22.platrum.ru/tasks/api/task/list', headers=headers,json=json_datap)
+    r = requests.get('https://...platrum.ru/tasks/api/task/list', headers=headers,json=json_datap)
     jsonDataP = r.json()
     dataP = jsonDataP.get('data')
     return dataP
@@ -113,11 +113,11 @@ def new_tasks():
 #поиск контакта по ид в хде
 def hde_id(params):
     headers = {
-                    "Authorization": "Basic ZHBAcGNoZWxwZXIucnU6N2Y5MjQ4OTctZDk3Yy00NGEzLWJhNTItMDJmN2Q0ZTY4YTAw",
+                    "Authorization": "Basic ...",
                     'Content-type': 'application/json',
                     'Cache-Control': 'no-cache'
                 }
-    r = requests.get('https://support.pchelper.ru/api/v2/users', headers=headers,params=params)
+    r = requests.get('https://....ru/api/v2/users', headers=headers,params=params)
     jsonData = r.json()
     data_id = jsonData.get('data')
     user_hde_n = data_id[0].get('id')
@@ -125,19 +125,19 @@ def hde_id(params):
 #проверка контакта на существование(если есть то взять его ид если нет то создать)
 def hde_users(json_datacall,params):
     headers = {
-                    "Authorization": "Basic ZHBAcGNoZWxwZXIucnU6N2Y5MjQ4OTctZDk3Yy00NGEzLWJhNTItMDJmN2Q0ZTY4YTAw",
+                    "Authorization": "Basic ...",
                     'Content-type': 'application/json',
                     'Cache-Control': 'no-cache'
                 }
-    r = requests.get('https://support.pchelper.ru/api/v2/users', headers=headers,params=params)
+    r = requests.get('https://....ru/api/v2/users', headers=headers,params=params)
     jsonData = r.json()
     data_c = jsonData.get('data')
     if len(data_c) == 0:
         headers = {
-                "Authorization": "Basic ZHBAcGNoZWxwZXIucnU6N2Y5MjQ4OTctZDk3Yy00NGEzLWJhNTItMDJmN2Q0ZTY4YTAw",
+                "Authorization": "Basic ...",
                 'Content-type': 'application/json'
         }
-        r = requests.post('https://support.pchelper.ru/api/v2/users', headers=headers,json=json_datacall)
+        r = requests.post('https://....ru/api/v2/users', headers=headers,json=json_datacall)
         user_hde = hde_id(params)
     else:user_hde = hde_id(params)
     return user_hde
