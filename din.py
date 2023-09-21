@@ -7,7 +7,7 @@ import json
 import threading, time
 import logging
 logging.basicConfig( 
-        filename = '22.log', 
+        filename = 'dv.log', 
         level = logging.ERROR, 
         format = '%(levelname)s:%(asctime)s:%(message)s')
 
@@ -27,10 +27,10 @@ def updateHDE(check_id):
 def commentPlatrum(json_comment):
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "792b9c96-8d59-4ed4-b554-7a9623b1953e"
     }
 
-    r = requests.post('https://stomatologia22.platrum.ru/tasks/api/tasks/comment/save', headers=headers,json=json_comment)
+    r = requests.post('https://dinvrach.platrum.ru/tasks/api/tasks/comment/save', headers=headers,json=json_comment)
     print(r.status_code)
 #комментарий хде
 def commentHDE(t_id):
@@ -39,7 +39,7 @@ def commentHDE(t_id):
             'Content-type': 'application/json',
     }
     json_hdecomm={
-        'text':'Заявка из Платрума, для связи используется почта, либо мобильный телефон'
+        'text':'Заявка из Платрума Династия врачей, для связи используется почта, либо мобильный телефон'
     }
     r = requests.post('https://support.pchelper.ru/api/v2/tickets/{}/comments/'.format(int(t_id)), headers=headers,json=json_hdecomm)
     print(r.status_code)
@@ -48,10 +48,10 @@ def commentHDE(t_id):
 def updatePlatrum(json_dataUP):
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "792b9c96-8d59-4ed4-b554-7a9623b1953e"
     }
 
-    r = requests.post('https://stomatologia22.platrum.ru/tasks/api/task/update', headers=headers,json=json_dataUP)
+    r = requests.post('https://dinvrach.platrum.ru/tasks/api/task/update', headers=headers,json=json_dataUP)
     print(r.text)
 #получение id заявки в хде по id из платрума
 def taskById(js_tid,check_id):
@@ -74,10 +74,10 @@ def taskById(js_tid,check_id):
 def status_platrum(json_dataTP):
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "792b9c96-8d59-4ed4-b554-7a9623b1953e"
     }
 
-    r = requests.get('https://stomatologia22.platrum.ru/tasks/api/task/get', headers=headers,json=json_dataTP)
+    r = requests.get('https://dinvrach.platrum.ru/tasks/api/task/get', headers=headers,json=json_dataTP)
     jsonDatatp = r.json()
     data_tp = jsonDatatp.get('data')
     return data_tp
@@ -100,9 +100,9 @@ def to_hde(json_datah):
 def by_id(id):
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "792b9c96-8d59-4ed4-b554-7a9623b1953e"
     }
-    r = requests.post('https://stomatologia22.platrum.ru/user/api/profile/list/', headers=headers)
+    r = requests.post('https://dinvrach.platrum.ru/user/api/profile/list/', headers=headers)
     jsonDatap = r.json()
     data=(jsonDatap.get('data'))
     if jsonDatap.get('data') == None:
@@ -128,13 +128,13 @@ def by_id(id):
 def new_tasks():
     headers = {
         'Content-type': 'application/json',
-        "Api-key": "bc98b0a3-cea6-464d-b35e-685f0fb63ed1"
+        "Api-key": "792b9c96-8d59-4ed4-b554-7a9623b1953e"
     }
     json_datap = {
         'responsible_user_ids': ['c41500e5c111a2e2894c8c8384acde5c','c41500e5c111a2e2894c8c8384acde5c'],
         'status_key':['new','in_progress']
     }
-    r = requests.get('https://stomatologia22.platrum.ru/tasks/api/task/list', headers=headers,json=json_datap)
+    r = requests.get('https://dinvrach.platrum.ru/tasks/api/task/list', headers=headers,json=json_datap)
     jsonDataP = r.json()
     dataP = jsonDataP.get('data')
     return dataP
@@ -244,7 +244,7 @@ while True:
             commentPlatrum(json_comment=jsoncomm)
         elif str(status) == "in_progress":
 
-            print("была 22")
+            print("была дин")
             task_id = data4[i].get('id')
 
             json_dataTP['id']=task_id
@@ -286,3 +286,4 @@ while True:
              #   print("hde")
             #else: print('net')
         time.sleep(10.0)
+
